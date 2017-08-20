@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<script>
+function Dog(name) {
+	this.name = name;
+}
+function makeDog(name) {
+	return new Dog(name);
+}
+
+var huan = (function () {
+	return makeDog('huanhuan');
+})();
+var hua = makeDog('hua');
+console.log(huan);
+console.log(hua);
+</script>
+<body>
+	
+</body>
+</html>

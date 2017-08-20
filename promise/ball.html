@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Promise Animation</title>
+</head>
+<style type="text/css" media="screen">
+	.ball {
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		margin-left: 0px;
+	}
+	.ball1 {
+		background-color: red;
+	}
+	.ball2 {
+		background-color: green;
+	}
+	.ball3 {
+		background-color: blue;
+	}
+</style>	
+<body>
+	<div class="ball ball1"></div>
+	<div class="ball ball2"></div>
+	<div class="ball ball3"></div>
+</body>
+<script type="text/javascript">
+	// 获取小球对象 
+	var ball1 = document.querySelector('.ball1');
+	var ball2 = document.querySelector('.ball2');
+	var ball3 = document.querySelector('.ball3');
+	/**
+	 * 动画函数
+	 * @param  {[object]}   ball     [执行动画的对象]
+	 * @param  {[number]}   distance [动画的终点位置]
+	 * @param  {Function} 	callback [动画执行完毕的回调函数]
+	 */
+	function animate(ball, distance, callback) {
+		setTimeout(function () {
+			var marginL = parseInt(getComputedStyle(ball,null).marginLeft, 10); 
+			// parseInt(string, radix)radix:解析数字的基数（数字的进制数）;
+			// getComputedStyle(element,伪类)获取元素的非行间样式 （非IE）
+			if (marginL === distance) {
+				// 如果callback存在则执行callback();
+				callback && callback();
+			} else {
+				if (marginL < distance) {
+					marginL++;
+				}
+				else {
+					marginL--;
+				}
+				// marginL和distance不等时才赋值
+				ball.style.marginLeft = marginL + 'px';
+				animate(ball, distance, callback);
+			}
+		}, 15);
+	}
+ 	/*animate(ball1, 100, function () {
+	    animate(ball2, 200, function () {
+			animate(ball3, 300, function () {
+				animate(ball3, 150, function () {
+					animate(ball2, 150, function () {
+						animate(ball1, 150, function () {
+							
+						});
+					});
+				});
+			});
+		});
+	});*/
+	/**
+	 * [promiseAnimate description] 返回promise实例对象的动画函数
+	 * @param  {[type]} ball     [description]
+	 * @param  {[type]} distance [description]
+	 * @return {[type]}          [description]
+	 */
+	function promiseAnimate(ball, distance) {
+		return new Promise(function (resolve, reject) {
+			function _animate() {
+				setTimeout(function () {
+					var marginL = parseInt(getComputedStyle(ball,null).marginLeft, 10); 
+					// parseInt(string, radix)radix:解析数字的基数（数字的进制数）;
+					// getComputedStyle(element,伪类)获取元素的非行间样式 （非IE）
+					if (marginL === distance) {
+						resolve(); 
+						// promise对象变为resolved(成功)执行的函数，可通过promise对象的then(resolve)等方法传入
+					} else {
+						if (marginL < distance) {
+							marginL++;
+						}
+						else {
+							marginL--;
+						}
+						// marginL和distance不等时才赋值
+						ball.style.marginLeft = marginL + 'px';
+						_animate();
+					}
+				}, 15);
+			}
+			_animate();
+		});
+	}
+
+
+
+
+	promiseAnimate(ball1, 100)
+		.then(function () { // then()方法返回一个新的promise实例
+			return promiseAnimate(ball2, 200);
+		})
+		.then(function () {
+			return promiseAnimate(ball3, 300);
+		})
+		.then(function () {
+			return promiseAnimate(ball3, 150);
+		})
+		.then(function () {
+			return promiseAnimate(ball2, 150);
+		})
+		.then(function () {
+			return promiseAnimate(ball1, 150);
+		});
+	
+	
+	// promiseAnimate(ball1, 100)
+	// 	.then(function () { // then()方法返回一个新的promise实例
+	// 		promiseAnimate(ball2, 200)
+	// 			.then(function () {
+	// 				promiseAnimate(ball3, 300)
+	// 					.then(function () {
+	// 						promiseAnimate(ball3, 150)
+	// 							.then(function () {
+	// 								promiseAnimate(ball2, 150)
+	// 									.then(function () {
+	// 										promiseAnimate(ball1, 150);
+	// 					});
+	// 				});
+	// 			});
+	// 		});
+	// 	});
+	
+	
+
+</script>
+</html>
