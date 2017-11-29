@@ -1,30 +1,45 @@
 // 1. 引入所需模块
 var http = require('http');
 var cheerio = require('cheerio');
-// var promise = require('Promise');
-// 2. 获取想要爬去的页面的html代码
-function getHtml() {
-	var courseDataArr = [];
-	var videosId = [728, 637, 348, 259, 197, 134, 75];
-	videosId.forEach(function (item) {
-		var url = 'http://www.imooc.com/learn/' + item;
-		http.get(url, function (res) {
-			var html = '';
-			res.on('data', function (data) {
-				html += data;
-			});
-			res.on('end', function() {
-				// courseDataArr.push(filterChapter(html));
-				var courseData = filterChapter(html);
-				printCourseInfo(courseData);
-			});
-		}).on('error', function(e) {
-			console.log(e);
+var promise = require('Bluebird');
+var fetchPageArr = [];
+var courseDataArr = [];
+var badeUrl = 'http://www.imooc.com/learn/';
+var videosId = [728, 637, 348, 259, 197, 134, 75];
+videosId.forEach(function(id){
+	fetchPageArr.push(getPageAsync(badeUrl + id));
+});
+Promise
+	.all(fetchPageArr)
+	.then(function(pages){
+		pages.forEach(function(page){
+			courseDataArr.push(filterChapter(page));
+		});
+		courseDataArr.forEach(function(courseData){
+			printCourseInfo(courseData);
 		});
 	});
+// 2. 获取想要爬去的页面的html代码
+function getPageAsync(url) {
+		return new Promise(function(resolve, reject){
+			var html = '';
+			http.get(url, function (res) {
+				res.on('data', function (data) {
+					console.log('正在加载 ' + url);
+					html += data;
+				});
+				res.on('end', function() {
+					resolve(html);
+					// var courseData = filterChapter(html);
+					// printCourseInfo(courseData);
+				});
+			}).on('error', function(e) {
+				reject(e);
+				console.log('获取课程出错');
+			});
+		});
 	// printCourseInfo(courseDataArr); //printCourseInfo会在请求完成之前执行，错误
 }
-getHtml();
 // 3. 过滤章节信息
 // 期望的得到的数据结构
 // var courseData = {
