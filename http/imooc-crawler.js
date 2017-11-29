@@ -43,7 +43,7 @@ function filterChapter(html) {
 			};
 			videos.each(function(item) {
 				var video = $(this),
-					videoTitle = $(video.find('.J-media-item')[0].text).trim(),
+					videoTitle = video.find('.J-media-item').text().trim(),
 					// str.trim() 去掉字符串str前后的空格，字符串中间的空格保留，返回处理后的字符串
 					videoId = video.data('media-id');
 				chapterData.videos.push({
