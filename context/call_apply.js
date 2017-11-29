@@ -6,13 +6,13 @@ var pet = {
 	}
 };
 
-// pet.speak();
+
+pet.speak();
 
 
 var dog = {
 	name: 'tom'
 };
 
-// pet.speak();
 pet.speak.call(dog, this.name);
 
