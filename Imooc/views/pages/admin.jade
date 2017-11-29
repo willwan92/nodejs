@@ -1,0 +1,47 @@
+//- 1.继承layout
+//- 2.定义内容区块
+//- 内容区块主要为：录入表单（action：/admin/movie），水平布局2:10,
+//- 录入字段：电影名称，导演，国家，语种，海报地址：movie.poster,片源地址：movie.flash,上映年份，简介
+//- 最后是录入按钮（偏移：2）
+
+extends ../layout
+
+block content
+	.container
+		.row
+			form.form-horizonal(type="post", action="/admin/movie")
+				.form-group
+					label.col-sm-2.control-label(for="#inputTitle")
+					.col-sm-10
+						input.form-control#inputTitle(type="text", name="movie[title]" value="#{movie.title}")
+				.form-group
+					label.col-sm-2.control-label(for="#inputDoctor")
+					.col-sm-10
+						input.form-control#inputDoctor(type="text", name="movie[doctor]" value="#{movie.doctor}")
+				.form-group
+					label.col-sm-2.control-label(for="#inputCuntry")
+					.col-sm-10
+						input.form-control#inputCuntry(type="text", name="movie[contry]" value="#{movie.contry}")
+				.form-group
+					label.col-sm-2.control-label(for="#inputLang")
+					.col-sm-10
+						input.form-control#inputLang(type="text", name="movie[language]" value="#{movie.language}")
+				.form-group
+					label.col-sm-2.control-label(for="#inputPoster")
+					.col-sm-10
+						input.form-control#inputPoster(type="text", name="movie[poster]" value="#{movie.poster}")
+				.form-group
+					label.col-sm-2.control-label(for="#inputFlash")
+					.col-sm-10
+						input.form-control#inputFlash(type="text", name="movie[flash]" value="#{movie.flash}")
+				.form-group
+					label.col-sm-2.control-label(for="#inputYear")
+					.col-sm-10
+						input.form-control#inputYear(type="text", name="movie[year]" value="#{movie.year}")
+				.form-group
+					label.col-sm-2.control-label(for="#inputSummary")
+					.col-sm-10
+						textarea.form-control#inputSummary(type="text", name="movie[summary]" value="#{movie.summary}")
+				.form-group
+					.col-sm-offset-2.col-sm-10
+						button.btn.btn-default(type="submit") 录入

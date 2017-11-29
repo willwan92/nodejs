@@ -9,6 +9,10 @@ function Pet() {
 	};
 }
 
+// Pet.speat();//错误写法，Pet类必须实例化后，方可调用内部方法。
+var pet1 = new Pet();
+pet1.speak();
+
 function Dog(name) {
 	this.name = name;
 	// Pet.call(this, this.name);

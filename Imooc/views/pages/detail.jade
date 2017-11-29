@@ -1,0 +1,31 @@
+//- 1.继承layout.jade
+//- 2.定义内容块
+
+//- 内容块包含
+//- 两栏布局7:5;
+//- 左栏：嵌入播放器:视频路径(movie.flash), 允许全屏， 质量：高；宽度：720；高度：600；居中，type：application/x-shockwave-flash
+//- 右栏：水平排版自定义列表
+//- 包含字段：电影名字：movie.title;导演：movie.doctor;国家：movie.country;语言：movie.language;上映年份：movie.year;简介：movie.summary
+
+
+extends ../layout.jade
+
+block content
+	.container
+		.row
+			.col-md-7
+				embed(src="#{movie.flash}", allowFullScreen="true", qulity="high", widht="720", high="600", align="middle", type="application/x-shockwave-flash")
+			.col-md-5
+				dl.dl-horizonal
+					dt 电影名称
+					dd = movie.title
+					dt 导演
+					dd = movie.doctor
+					dt 国家
+					dd = movie.country
+					dt 语言
+					dd = movie.language
+					dt 上映年份
+					dd = movie.year
+					dt 简介
+					dd = movie.sumary
