@@ -7,6 +7,9 @@
 // 7.打印服务启用成功日志
 // 8.编写路由
 
+// 9伪造页面数据
+// 首页数据--电影列表：movies; 电影数据包含字段 {title:,_id:,poster:,}
+// 详情页包含数据--电影列表：movies; 电影数据包含字段 {title:,_id:,poster:,}
 var express = require('express');
 var app = express();
 var port = process.env.PORT = 3000;
@@ -20,7 +23,11 @@ console.log('Imooc started on port ' + port);
 // index page
 app.get('/', function (req, res) {
 	res.render('index', {
-		title: "Imooc 首页"
+		title: "Imooc 首页",
+		movies: [{
+			title: "复仇者联盟3：无限战争",
+
+		}]
 	})
 });
 
