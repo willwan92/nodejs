@@ -14,18 +14,19 @@ block content
 	.container
 		.row
 			.col-md-7
-				embed(src="#{movie.flash}", allowFullScreen="true", qulity="high", widht="720", high="600", align="middle", type="application/x-shockwave-flash")
+				//- embed(src="#{movie.flash}", allowFullScreen="true", qulity="high", width="720", height="480", align="middle", type="application/x-shockwave-flash")
+				video(preload="metadata" conrtols="true" src="#{movie.flash}" style="width: 720px; height: 480px; background-color: rgb(0, 0, 0)")
 			.col-md-5
 				dl.dl-horizontal
 					dt 电影名称
-					dd = movie.title
+					dd  #{movie.title}
 					dt 导演
-					dd = movie.doctor
+					dd #{movie.doctor}
 					dt 国家
-					dd = movie.country
+					dd #{movie.country}
 					dt 语言
-					dd = movie.language
+					dd #{movie.language}
 					dt 上映年份
-					dd = movie.year
+					dd #{movie.year}
 					dt 简介
-					dd = movie.sumary
+					dd #{movie.summary}
