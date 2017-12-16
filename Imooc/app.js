@@ -7,11 +7,16 @@
 // 7.打印服务启用成功日志
 // 8.编写路由
 // 9.伪造页面数据
-// 
+//
 // 10. 引入path模块（便于指定请求静态资源路径）
 // 11. 指定请求静态资源时使用的路径
 // 12. 修改视图的默认目录（因为之前修改了视图目录views-->views>pages+includes）
 // 13. 添加解析表单
+//
+// 14. 引入mongoose和Movie模型
+// 15. 通过mongoose.connect()连接到本地数据库'mongodb: //localhost/imooc'
+// 16. 编写首页、详情页、列表页与数据库的交互逻辑
+// 17. 安装并引入underscore，添加后台录入页提交表单的路由
 
 var express = require('express');
 var path = require('path');
