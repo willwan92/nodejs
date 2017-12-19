@@ -10,6 +10,7 @@ block content
 	.container
 		.row
 			form.form-horizontal(type="post", action="/admin/movie")
+				input(type="hidden", name="movie[_id]", value="#{movie._id}")
 				.form-group
 					label.col-sm-2.control-label(for="#inputTitle") 电影名称
 					.col-sm-10
