@@ -25,7 +25,7 @@ var path = require('path');
 var _ = require('underscore');
 var app = express();
 var bodyParser = require('body-parser');
-var Movie = require('../models/movie');
+var Movie = require('./models/movie');
 var port = process.env.PORT = 3000;
 
 mongoose.connect('mongodb://localhost/imooc');
@@ -87,8 +87,8 @@ app.get('/admin/movie', function (req, res) {
 			year: "",
 			summary: ""
 		}
-	})
-})
+	});
+});
 
 // admin post movie
 app.post('/admin/movie/new', function (req, res) {
@@ -104,8 +104,8 @@ app.post('/admin/movie/new', function (req, res) {
 			_movie.save(function (err, movie) {
 				if (err) { console.log(err); }
 				res.redirect('/movie/' + movie._id);
-			})
-		})
+			});
+		});
 	}
 	else {
 		_movie = new Movie({
@@ -121,12 +121,12 @@ app.post('/admin/movie/new', function (req, res) {
 		_movie.save(function (err, movie) {
 			if (err) { console.log(err); }
 			res.redirect('/movie/' + movie._id);
-		})
+		});
 	}
-})
+});
 
 // admin update page
-app.update('/admin/movie:id', function (req, res) {
+app.get('/admin/movie:id', function (req, res) {
 	var id = req.params.id;
 
 	if (id) {
@@ -134,10 +134,10 @@ app.update('/admin/movie:id', function (req, res) {
 			res.render('admin', {
 				title: "更新" + movie.title,
 				movie: movie
-			})
-		})
+			});
+		});
 	}
-})
+});
 
 // list page
 // list页数据 movies:{电影名称，导演，国家，语种，海报地址：movie.poster,片源地址：movie.flash,上映年份，简介, 录入时间:meta.createdAt; 电影id:_id; }
@@ -152,4 +152,4 @@ app.get('/admin/list', function (req, res) {
 			movies: movies
 		});
 	});
-})
+});

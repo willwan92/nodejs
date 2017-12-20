@@ -1,4 +1,4 @@
-// 引入mongoose
+// 引入mongoose	
 // 通过mongoose.Schema({})实例化一个电影模式movieSchema，传入一个json对象用来定义跟电影有关的字段的数据类型
 // {}包含字段：docton, title, language, country, summary, flash, poster, year, meat: {creatAt:{type: Date, default: Date.now()}, updateAt:{}}
 // 通过movieSchema.pre("save", function)为模式添加保存数据之前方法，用来记录新增数据或修改数据的时间，并执行next()保存数据
@@ -9,14 +9,14 @@
 var mongoose = require("mongoose");
 
 var movieSchema = mongoose.Schema({
-	doctor: string,
-	title: string,
-	language: string,
-	country: string,
-	summary: string,
-	flash: string,
-	poster: string,
-	year: number,
+	doctor: String,
+	title: String,
+	language: String,
+	country: String,
+	summary: String,
+	flash: String,
+	poster: String,
+	year: Number,
 	meta: {
 		createAt: {
 			type: Date,
@@ -38,7 +38,7 @@ movieSchema.pre("save", function (next) {
 	next();
 });
 
-movie.statics = {
+movieSchema.statics = {
 	fetch: function (cb) {
 		return this
 			.find({})
@@ -47,10 +47,10 @@ movie.statics = {
 	},
 	findById: function (id, cb) {
 		return this
-			.find({_id: id})
+			.findOne({_id: id})
 			exec(cb);
 	}
-}
+};
 
 
 module.exports = movieSchema;
