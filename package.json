@@ -1,0 +1,38 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "learn nodejs",
+  "main": "index.js",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
+    "jade": "^1.11.0",
+    "moment": "^2.19.2",
+    "mongodb": "^3.0.0-rc0",
+    "mongoose": "^4.13.5",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willwan92/nodejs.git"
+  },
+  "author": "Will Wan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willwan92/nodejs/issues"
+  },
+  "homepage": "https://github.com/willwan92/nodejs#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
